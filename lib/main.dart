@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stay_fit/diet_manager.dart';
-import 'package:stay_fit/emoji_recorder.dart';
-import 'package:stay_fit/emoji_recorder_page.dart';
-import 'package:stay_fit/workout_manager.dart';
+import 'package:stay_fit/diet/diet_manager.dart';
+import 'package:stay_fit/diet/diet_recorder_page.dart';
+import 'package:stay_fit/emotions/emoji_recorder_page.dart';
+import 'package:stay_fit/workout/workout_manager.dart';
+import 'package:stay_fit/workout/workout_recorder_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,16 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const EmojiRecorderPage(),
             ),
             Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: const DietManager(),
-                )
+              child: const DietRecorderPage(),
             ),
             Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: const WorkoutManager(),
-                )
+                child:  const WorkoutRecorderPage(),
             ),
           ],
         ),

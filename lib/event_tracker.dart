@@ -16,34 +16,18 @@ class EventTracker extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: List.generate(
-                  _event.length, (index) => ItemWidget(text: '${_event.elementAt(index).text}', date: _event.elementAt(index).date)
+                  _event.length, (index) => Card(
+                color: Color.fromRGBO(173, 167, 153, 5),
+                child: SizedBox(
+                  height: 60,
+                  child: Center(child: Text('  ${_event.elementAt(index).text} on ${_event.elementAt(index).date.day}-${_event.elementAt(index).date.month}-${_event.elementAt(index).date.year} at ${_event.elementAt(index).date.hour}-${_event.elementAt(index).date.minute}-${_event.elementAt(index).date.second}.')),
+                ),
+              ),
               ),
             ),
           ),
         );
       }),
-    );
-  }
-}
-
-class ItemWidget extends StatelessWidget {
-  const ItemWidget({
-    super.key,
-    required this.text,
-    required this.date,
-  });
-
-  final String text;
-  final DateTime date;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Color.fromRGBO(173, 167, 153, 5),
-      child: SizedBox(
-        height: 60,
-        child: Center(child: Text('  $text on ${date.day}-${date.month}-${date.year} at ${date.hour}-${date.minute}-${date.second}.')),
-      ),
     );
   }
 }
