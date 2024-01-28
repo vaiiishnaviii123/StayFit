@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_fit/diet/diet_manager.dart';
 
 import '../event.dart';
+import '../event_tracker.dart';
 
 class DietRecorderPage extends StatefulWidget {
   const DietRecorderPage({super.key});
@@ -42,8 +43,8 @@ class _DietRecorderPageState extends State<DietRecorderPage> {
         ),
         body: ListView(
           children: [
-            DietManager(),
-            //EventTracker(_emotionEvents),
+            DietManager(_addDietEvent),
+            EventTracker(_dietEvents),
           ],
         )
     );

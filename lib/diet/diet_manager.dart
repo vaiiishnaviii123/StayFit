@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../event.dart';
+
 class DietManager extends StatefulWidget {
-  const DietManager({super.key});
+  final void Function(Event event) addDietEvent;
+  const DietManager(this.addDietEvent, {super.key});
 
   @override
   _DietManagerState createState() {
@@ -21,7 +24,12 @@ class _DietManagerState extends State<DietManager> {
       print('Please enter the quantity.');
     }else{
       print("Your Dish has been recorded!");
-      print('Dish: '+ myDietController.text + ',  Quantity: ' + myQuantityController.text);
+      String str = 'Dish: '+ myDietController.text + ',  Quantity: ' + myQuantityController.text;
+      Event event = Event(
+          str,
+          DateTime.now()
+      );
+      widget.addDietEvent(event);
     }
   }
 
