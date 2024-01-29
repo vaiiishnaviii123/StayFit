@@ -16,8 +16,21 @@ class _DietManagerState extends State<DietManager> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController myQuantityController = TextEditingController();
   final TextEditingController myDietController = TextEditingController();
+  final TextEditingController _controller = new TextEditingController();
+  late bool _enabled;
+  var country = <String>{};
+
+  @override
+  void initState() {
+    _enabled = false;
+    super.initState();
+  }
 
   void _onSavePressed(){
+    country.add(myDietController.text);
+    setState(() => _enabled = true);
+    //_controller.clear();
+    print(country);
     if(myDietController == null){
       print('Please enter a valid Dish');
     }else if(myQuantityController == null){
@@ -43,18 +56,35 @@ class _DietManagerState extends State<DietManager> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text("Diet Record.", style: TextStyle(color: Colors.black54, fontSize: 35)),
-          TextFormField(
-            controller: myDietController,
-            decoration: InputDecoration(
-              labelText: 'Enter the dish.',
-            ),
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a valid positive quan ';
-              }
-              return null;
-            },
+          Row(
+            children: <Widget>[
+              Expanded(
+                  child: TextFormField(
+                    controller: myDietController,
+                    decoration: InputDecoration(
+                      labelText: 'Enter the dish.',
+                    ),
+                    // The validator receives the text that the user has entered.
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a valid positive quan ';
+                      }
+                      return null;
+                    },
+                  ),
+              ),
+              if(this._enabled)PopupMenuButton<String>(
+                icon: const Icon(Icons.arrow_drop_down),
+                onSelected: (String value) {
+                  myDietController.text = value;
+                },
+                itemBuilder: (BuildContext context) {
+                  return country.map<PopupMenuItem<String>>((String value) {
+                    return  PopupMenuItem(value: value, child:  Text(value));
+                  }).toList();
+                },
+              ),
+            ],
           ),
           TextFormField(
             keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),

@@ -5,6 +5,8 @@ import 'package:stay_fit/emotions/emoji_recorder_page.dart';
 import 'package:stay_fit/workout/workout_manager.dart';
 import 'package:stay_fit/workout/workout_recorder_page.dart';
 
+import 'dropdown_textbox.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -65,6 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Center(
                 child:  const WorkoutRecorderPage(),
+            ),
+            Center(
+              child: const DropdownTextBox(),
             ),
           ],
         ),
