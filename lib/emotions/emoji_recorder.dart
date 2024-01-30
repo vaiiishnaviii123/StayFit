@@ -4,6 +4,8 @@ import 'package:stay_fit/Models/event.dart';
 import 'package:stay_fit/Models/reward.dart';
 import 'package:stay_fit/reward_points.dart';
 
+import '../event_emotions_list.dart';
+
 class EmojiRecorder extends StatefulWidget {
   final void Function(Event event) addEmotionEvent;
   const EmojiRecorder(this.addEmotionEvent, {super.key});
@@ -54,6 +56,7 @@ class _EmojiRecorderState extends State<EmojiRecorder> {
      context.read<RewardPoints>().setEvent('Emotions');
      context.read<RewardPoints>().setDate(DateTime.now());
      context.read<RewardPoints>().setPoints(1.0);
+     context.read<EmotionList>().addEmotionsToList(event);
   }
 
   @override

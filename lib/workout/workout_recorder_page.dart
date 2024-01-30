@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stay_fit/event_workout_list.dart';
 import 'package:stay_fit/workout/workout_manager.dart';
 import 'package:stay_fit/Models/event.dart';
 import '../event_tracker.dart';
@@ -46,7 +48,7 @@ class _WorkoutRecorderPageState extends State<WorkoutRecorderPage> {
           children: [
             RewardPointsPage(),
             WorkoutManager(_addWorkoutEvent),
-            EventTracker(_workoutEvents),
+             EventTracker(context.watch<WorkoutList>().getWorkoutList()),
           ],
         )
     );

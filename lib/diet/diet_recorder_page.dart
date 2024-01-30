@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stay_fit/diet/diet_manager.dart';
 import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/event_diet_list.dart';
 import '../event_tracker.dart';
 import '../reward_points_page.dart';
 
@@ -45,7 +47,7 @@ class _DietRecorderPageState extends State<DietRecorderPage> {
           children: [
             RewardPointsPage(),
             DietManager(_addDietEvent),
-            EventTracker(_dietEvents),
+            EventTracker(context.watch<DietList>().getDietList()),
           ],
         )
     );

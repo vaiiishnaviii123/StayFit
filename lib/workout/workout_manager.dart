@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
 
+import '../event_workout_list.dart';
 import '../reward_points.dart';
 
 enum WorkoutLabel {
@@ -51,6 +52,7 @@ class _WorkoutManagerState extends State<WorkoutManager> {
       context.read<RewardPoints>().setEvent('Workout');
       context.read<RewardPoints>().setDate(DateTime.now());
       context.read<RewardPoints>().setPoints(1.0);
+      context.read<WorkoutList>().addWorkoutToList(event);
     }
   }
 

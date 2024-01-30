@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/event_emotions_list.dart';
 
 class EventTracker extends StatelessWidget {
   final List<Event> _event;
@@ -16,7 +18,7 @@ class EventTracker extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: List.generate(
-                  _event.length, (index) => Card(
+                _event.length, (index) => Card(
                 color: Color.fromRGBO(173, 167, 153, 5),
                 child: SizedBox(
                   height: 60,

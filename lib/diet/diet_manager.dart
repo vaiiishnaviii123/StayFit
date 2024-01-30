@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/event_diet_list.dart';
 
 import '../reward_points.dart';
 
@@ -48,6 +49,7 @@ class _DietManagerState extends State<DietManager> {
       context.read<RewardPoints>().setEvent('Diet');
       context.read<RewardPoints>().setDate(DateTime.now());
       context.read<RewardPoints>().setPoints(1.0);
+      context.read<DietList>().addDietToList(event);
     }
   }
 

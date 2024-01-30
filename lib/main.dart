@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stay_fit/Models/event.dart';
 import 'package:stay_fit/diet/diet_manager.dart';
 import 'package:stay_fit/diet/diet_recorder_page.dart';
 import 'package:stay_fit/emotions/emoji_recorder_page.dart';
+import 'package:stay_fit/event_diet_list.dart';
+import 'package:stay_fit/event_emotions_list.dart';
+import 'package:stay_fit/event_workout_list.dart';
 import 'package:stay_fit/reward_points.dart';
 import 'package:stay_fit/reward_points_page.dart';
 import 'package:stay_fit/workout/workout_manager.dart';
 import 'package:stay_fit/workout/workout_recorder_page.dart';
+import 'package:stay_fit/Models/event.dart';
 
 import 'Models/reward.dart';
 import 'dropdown_textbox.dart';
@@ -53,9 +58,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Reward rp = new Reward(0, 0, "", DateTime.now());
     final PageController controller = PageController();
+    List<Event> list = [];
+    List<Event> dietList = [];
+    List<Event> workoutList = [];
 
-    return ChangeNotifierProvider(
-        create: (context) => RewardPoints(rp),
+    return MultiProvider(
+      providers: [
+          ChangeNotifierProvider( create: (context) => RewardPoints(rp)),
+          ChangeNotifierProvider(create: (context) => EmotionList(list)),
+          ChangeNotifierProvider(create: (context) => DietList(dietList)),
+          ChangeNotifierProvider(create: (context) => WorkoutList(workoutList))
+      ],
         child: Scaffold(
         backgroundColor: Color.fromRGBO(191, 186, 188, 1),
         appBar: AppBar(

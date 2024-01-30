@@ -6,6 +6,8 @@ import 'package:stay_fit/Models/event.dart';
 import 'package:stay_fit/reward_points.dart';
 import 'package:stay_fit/reward_points_page.dart';
 
+import '../event_emotions_list.dart';
+
 class EmojiRecorderPage extends StatefulWidget {
   const EmojiRecorderPage({super.key});
 
@@ -42,7 +44,7 @@ class _EmojiRecorderPageState extends State<EmojiRecorderPage> {
           children: [
             RewardPointsPage(),
             EmojiRecorder(_addEmotionEvent),
-            EventTracker(_emotionEvents),
+            EventTracker(context.watch<EmotionList>().getEmotionsList()),
           ],
         )
     );
