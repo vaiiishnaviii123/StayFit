@@ -34,7 +34,9 @@ class _RewardPointsPageState extends State<RewardPointsPage> {
          if(context.watch<RewardPoints>().getRewardPoints().event.isNotEmpty)Text('Last Event Recorded: ${context.watch<RewardPoints>().getRewardPoints().event}', style: TextStyle(color: Colors.white, fontSize: 15),),
          Text('Dedication Level: ${context.watch<RewardPoints>().getRewardPoints().dedication}', style: TextStyle(color: Colors.white, fontSize: 15),),
          if(context.watch<RewardPoints>().getRewardPoints().event.isNotEmpty)Text('Last Recorded on: ${context.watch<RewardPoints>().getRewardPoints().date}', style: TextStyle(color: Colors.white, fontSize: 15),),
-         if(context.watch<RewardPoints>().getRewardPoints().event.isEmpty)Text('Log your first record to earn points!', style: TextStyle(color: Colors.black54, fontSize: 15),)
+         if(context.watch<RewardPoints>().getRewardPoints().event.isEmpty)Text('Log your first record to earn points!', style: TextStyle(color: Colors.black54, fontSize: 15),),
+         if(context.watch<RewardPoints>().getRewardPoints().event.isNotEmpty)Text('Earn ${context.watch<RewardPoints>().getRewardPoints().pointForNextLevel} points to reach next level, hurry up!', style: TextStyle(color: Colors.black54, fontSize: 15),)
+
        ],
       ),
     );

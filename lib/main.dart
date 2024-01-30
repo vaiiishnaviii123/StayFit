@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Reward rp = new Reward(0, 0, "", DateTime.now());
+    Reward rp = new Reward(0, 0, "", DateTime.now(), 100.0);
     final PageController controller = PageController();
     List<Event> list = [];
     List<Event> dietList = [];

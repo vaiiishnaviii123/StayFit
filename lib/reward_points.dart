@@ -39,9 +39,9 @@ class RewardPoints with ChangeNotifier {
     // Calculate time difference in minutes
     double timeDifference = currentTime.difference(reward.date).inMinutes.toDouble();
 
-    if (timeDifference > 2) {
+    if (timeDifference > 10) {
       // If last submission was more than 2 minutes ago, reduce 1 point for every 2 mins difference
-      double pointsToDeduct = (timeDifference / 2).floorToDouble();
+      double pointsToDeduct = (timeDifference / 10).floorToDouble();
       reward.rewardPoints += (10 - pointsToDeduct);
 
       // Ensure points don't go below zero
@@ -58,5 +58,6 @@ class RewardPoints with ChangeNotifier {
     // Calculate dedication level
     reward.dedication = (reward.rewardPoints ~/ 100).toInt();
     reward.date = currentTime;
+    reward.pointForNextLevel = (reward.dedication + 1) * 100 - reward.rewardPoints;
   }
 }
