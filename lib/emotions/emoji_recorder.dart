@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stay_fit/event.dart';
+import 'package:provider/provider.dart';
+import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/Models/reward.dart';
+import 'package:stay_fit/reward_points.dart';
 
 class EmojiRecorder extends StatefulWidget {
   final void Function(Event event) addEmotionEvent;
@@ -48,12 +51,15 @@ class _EmojiRecorderState extends State<EmojiRecorder> {
           DateTime.now()
      );
      widget.addEmotionEvent(event);
+     context.read<RewardPoints>().setEvent('Emotions');
+     context.read<RewardPoints>().setDate(DateTime.now());
+     context.read<RewardPoints>().setPoints(1.0);
   }
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-    return Container(
+    return SingleChildScrollView(
       child: GridView.count(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,

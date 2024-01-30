@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stay_fit/diet/diet_manager.dart';
+import 'package:provider/provider.dart';
+import 'package:stay_fit/Models/event.dart';
 
-import '../event.dart';
+import '../reward_points.dart';
 
 enum WorkoutLabel {
   pushups('Push-ups'),
@@ -47,6 +48,9 @@ class _WorkoutManagerState extends State<WorkoutManager> {
           DateTime.now()
       );
       widget.addWorkoutEvent(event);
+      context.read<RewardPoints>().setEvent('Workout');
+      context.read<RewardPoints>().setDate(DateTime.now());
+      context.read<RewardPoints>().setPoints(1.0);
     }
   }
 

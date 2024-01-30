@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stay_fit/emotions/emoji_recorder.dart';
 import 'package:stay_fit/event_tracker.dart';
-
-import '../event.dart';
+import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/reward_points.dart';
+import 'package:stay_fit/reward_points_page.dart';
 
 class EmojiRecorderPage extends StatefulWidget {
   const EmojiRecorderPage({super.key});
@@ -27,22 +29,18 @@ class _EmojiRecorderPageState extends State<EmojiRecorderPage> {
     // TODO: implement build
     return Scaffold(
         backgroundColor: Color.fromRGBO(191, 186, 188, 1),
-        appBar: AppBar(
-          backgroundColor: Theme
-              .of(context)
-              .primaryColor,
-          title: Center(
-            child: Text(
-              'How do you feel today?',
-              style: TextStyle(color: Theme
-                  .of(context)
-                  .colorScheme
-                  .onPrimary),
-            ),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: const Color.fromRGBO(82, 7, 39, 2),
+        //   title: Center(
+        //     child: Text(
+        //       'Reward Points ${context.watch<RewardPoints>().getRewardPoints().rewardPoints}',
+        //       style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        //     ),
+        //   ),
+        // ),
         body: ListView(
           children: [
+            RewardPointsPage(),
             EmojiRecorder(_addEmotionEvent),
             EventTracker(_emotionEvents),
           ],

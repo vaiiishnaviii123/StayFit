@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stay_fit/Models/event.dart';
 
-import '../event.dart';
+import '../reward_points.dart';
 
 class DietManager extends StatefulWidget {
   final void Function(Event event) addDietEvent;
@@ -43,6 +45,9 @@ class _DietManagerState extends State<DietManager> {
           DateTime.now()
       );
       widget.addDietEvent(event);
+      context.read<RewardPoints>().setEvent('Diet');
+      context.read<RewardPoints>().setDate(DateTime.now());
+      context.read<RewardPoints>().setPoints(1.0);
     }
   }
 

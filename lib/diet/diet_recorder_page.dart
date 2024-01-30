@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stay_fit/diet/diet_manager.dart';
-
-import '../event.dart';
+import 'package:stay_fit/Models/event.dart';
 import '../event_tracker.dart';
+import '../reward_points_page.dart';
 
 class DietRecorderPage extends StatefulWidget {
   const DietRecorderPage({super.key});
@@ -27,22 +27,23 @@ class _DietRecorderPageState extends State<DietRecorderPage> {
     // TODO: implement build
     return Scaffold(
         backgroundColor: Color.fromRGBO(191, 186, 188, 1),
-        appBar: AppBar(
-          backgroundColor: Theme
-              .of(context)
-              .primaryColor,
-          title: Center(
-            child: Text(
-              'How do you feel today?',
-              style: TextStyle(color: Theme
-                  .of(context)
-                  .colorScheme
-                  .onPrimary),
-            ),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Theme
+        //       .of(context)
+        //       .primaryColor,
+        //   title: Center(
+        //     child: Text(
+        //       'How do you feel today?',
+        //       style: TextStyle(color: Theme
+        //           .of(context)
+        //           .colorScheme
+        //           .onPrimary),
+        //     ),
+        //   ),
+        // ),
         body: ListView(
           children: [
+            RewardPointsPage(),
             DietManager(_addDietEvent),
             EventTracker(_dietEvents),
           ],

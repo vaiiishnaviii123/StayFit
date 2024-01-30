@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stay_fit/event.dart';
+import 'package:stay_fit/Models/event.dart';
 
 class EventTracker extends StatelessWidget {
   final List<Event> _event;

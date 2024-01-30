@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stay_fit/diet/diet_manager.dart';
 import 'package:stay_fit/diet/diet_recorder_page.dart';
 import 'package:stay_fit/emotions/emoji_recorder_page.dart';
+import 'package:stay_fit/reward_points.dart';
+import 'package:stay_fit/reward_points_page.dart';
 import 'package:stay_fit/workout/workout_manager.dart';
 import 'package:stay_fit/workout/workout_recorder_page.dart';
 
+import 'Models/reward.dart';
 import 'dropdown_textbox.dart';
 
 void main() {
@@ -47,16 +51,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Reward rp = new Reward(0, 0, "", DateTime.now());
     final PageController controller = PageController();
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(82, 7, 39, 2),
-        title: Text(widget.title, style: TextStyle(color: Colors.white),),
-      ),
-      body: Container(
-        color: Color.fromRGBO(191, 186, 188, 1),
-        child: PageView(
+    return ChangeNotifierProvider(
+        create: (context) => RewardPoints(rp),
+        child: Scaffold(
+        backgroundColor: Color.fromRGBO(191, 186, 188, 1),
+        appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(82, 7, 39, 2),
+          title: Column(
+            children: [
+              Text(widget.title, style: TextStyle(color: Colors.white),),
+              // RewardPointsPage(),
+            ],
+          )
+        ),
+        body : PageView(
           controller: controller,
           children: const <Widget>[
             Center(
@@ -67,9 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Center(
                 child:  const WorkoutRecorderPage(),
-            ),
-            Center(
-              child: const DropdownTextBox(),
             ),
           ],
         ),
