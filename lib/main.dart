@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
 import 'package:stay_fit/diet/diet_manager.dart';
 import 'package:stay_fit/diet/diet_recorder_page.dart';
+import 'package:stay_fit/diet_menu.dart';
 import 'package:stay_fit/emotions/emoji_recorder_page.dart';
 import 'package:stay_fit/event_diet_list.dart';
 import 'package:stay_fit/event_emotions_list.dart';
@@ -61,13 +62,15 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Event> list = [];
     List<Event> dietList = [];
     List<Event> workoutList = [];
+    var dietMenu = <String>{};
 
     return MultiProvider(
       providers: [
           ChangeNotifierProvider( create: (context) => RewardPoints(rp)),
           ChangeNotifierProvider(create: (context) => EmotionList(list)),
           ChangeNotifierProvider(create: (context) => DietList(dietList)),
-          ChangeNotifierProvider(create: (context) => WorkoutList(workoutList))
+          ChangeNotifierProvider(create: (context) => WorkoutList(workoutList)),
+        ChangeNotifierProvider(create: (context) => DietMenu(dietMenu)),
       ],
         child: Scaffold(
         backgroundColor: Color.fromRGBO(191, 186, 188, 1),

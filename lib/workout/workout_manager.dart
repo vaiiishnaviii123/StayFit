@@ -50,8 +50,9 @@ class _WorkoutManagerState extends State<WorkoutManager> {
       );
       widget.addWorkoutEvent(event);
       context.read<RewardPoints>().setEvent('Workout');
-      context.read<RewardPoints>().setDate(DateTime.now());
-      context.read<RewardPoints>().setPoints(1.0);
+      // context.read<RewardPoints>().setDate(DateTime.now());
+      // context.read<RewardPoints>().setPoints(1.0);
+      context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<WorkoutList>().addWorkoutToList(event);
     }
   }

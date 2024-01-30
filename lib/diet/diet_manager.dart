@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/diet_menu.dart';
 import 'package:stay_fit/event_diet_list.dart';
 
 import '../reward_points.dart';
@@ -21,19 +22,23 @@ class _DietManagerState extends State<DietManager> {
   final TextEditingController myDietController = TextEditingController();
   final TextEditingController _controller = new TextEditingController();
   late bool _enabled;
-  var country = <String>{};
+ // var dietMenu = <String>{};
 
   @override
   void initState() {
-    _enabled = false;
+    if(context.read<DietMenu>().getDietMenu().isEmpty){
+      _enabled = false;
+    }else{
+      _enabled = true;
+    }
     super.initState();
   }
 
   void _onSavePressed(){
-    country.add(myDietController.text);
-    setState(() => _enabled = true);
+    context.read<DietMenu>().addDietToList(myDietController.text);
+    // setState(() => _enabled = true);
     //_controller.clear();
-    print(country);
+   // print(dietMenu);
     if(myDietController == null){
       print('Please enter a valid Dish');
     }else if(myQuantityController == null){
@@ -47,8 +52,9 @@ class _DietManagerState extends State<DietManager> {
       );
       widget.addDietEvent(event);
       context.read<RewardPoints>().setEvent('Diet');
-      context.read<RewardPoints>().setDate(DateTime.now());
-      context.read<RewardPoints>().setPoints(1.0);
+      // context.read<RewardPoints>().setDate(DateTime.now());
+      // context.read<RewardPoints>().setPoints(1.0);
+      context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<DietList>().addDietToList(event);
     }
   }
@@ -86,7 +92,7 @@ class _DietManagerState extends State<DietManager> {
                   myDietController.text = value;
                 },
                 itemBuilder: (BuildContext context) {
-                  return country.map<PopupMenuItem<String>>((String value) {
+                  return  context.read<DietMenu>().getDietMenu().map<PopupMenuItem<String>>((String value) {
                     return  PopupMenuItem(value: value, child:  Text(value));
                   }).toList();
                 },
