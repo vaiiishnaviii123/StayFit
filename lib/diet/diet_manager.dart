@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
-import 'package:stay_fit/diet_menu.dart';
-import 'package:stay_fit/event_diet_list.dart';
+import 'package:stay_fit/providers/diet_menu.dart';
+import 'package:stay_fit/providers/event_diet_list.dart';
 
-import '../reward_points.dart';
+import '../providers/reward_points.dart';
 
 class DietManager extends StatefulWidget {
-  final void Function(Event event) addDietEvent;
-  const DietManager(this.addDietEvent, {super.key});
+  const DietManager({super.key});
 
   @override
   _DietManagerState createState() {
@@ -20,9 +19,7 @@ class _DietManagerState extends State<DietManager> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController myQuantityController = TextEditingController();
   final TextEditingController myDietController = TextEditingController();
-  final TextEditingController _controller = new TextEditingController();
   late bool _enabled;
- // var dietMenu = <String>{};
 
   @override
   void initState() {
@@ -36,24 +33,19 @@ class _DietManagerState extends State<DietManager> {
 
   void _onSavePressed(){
     context.read<DietMenu>().addDietToList(myDietController.text);
-    // setState(() => _enabled = true);
-    //_controller.clear();
-   // print(dietMenu);
+    setState(() => _enabled = true);
     if(myDietController == null){
       print('Please enter a valid Dish');
     }else if(myQuantityController == null){
       print('Please enter the quantity.');
     }else{
       print("Your Dish has been recorded!");
-      String str = 'Dish: '+ myDietController.text + ',  Quantity: ' + myQuantityController.text;
+      String str = 'Dish: '+ myDietController.text + ', Quantity: ' + myQuantityController.text +' grams';
       Event event = Event(
           str,
           DateTime.now()
       );
-      widget.addDietEvent(event);
       context.read<RewardPoints>().setEvent('Diet');
-      // context.read<RewardPoints>().setDate(DateTime.now());
-      // context.read<RewardPoints>().setPoints(1.0);
       context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<DietList>().addDietToList(event);
     }
@@ -68,11 +60,12 @@ class _DietManagerState extends State<DietManager> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Diet Record.", style: TextStyle(color: Colors.black54, fontSize: 35)),
+          Center(child: const Text("Diet Record.", style: TextStyle(color: Colors.black54, fontSize: 35))),
           Row(
             children: <Widget>[
               Expanded(
                   child: TextFormField(
+                    key: Key("DietText"),
                     controller: myDietController,
                     decoration: InputDecoration(
                       labelText: 'Enter the dish.',
@@ -87,6 +80,7 @@ class _DietManagerState extends State<DietManager> {
                   ),
               ),
               if(this._enabled)PopupMenuButton<String>(
+                key: Key("DietMenuButton"),
                 icon: const Icon(Icons.arrow_drop_down),
                 onSelected: (String value) {
                   myDietController.text = value;
@@ -100,6 +94,7 @@ class _DietManagerState extends State<DietManager> {
             ],
           ),
           TextFormField(
+            key: Key("Quantity"),
             keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
             controller: myQuantityController,
             decoration: InputDecoration(
@@ -113,16 +108,16 @@ class _DietManagerState extends State<DietManager> {
               return null;
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+          Center(
             child: ElevatedButton(
+              key: Key("DietButton"),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
                   // you'd often call a server or save the information in a database.
                   _onSavePressed();
                 }
+                FocusScope.of(context).unfocus();
               },
               child: const Text('Submit'),
             ),

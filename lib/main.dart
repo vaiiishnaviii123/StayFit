@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
-import 'package:stay_fit/diet/diet_manager.dart';
 import 'package:stay_fit/diet/diet_recorder_page.dart';
-import 'package:stay_fit/diet_menu.dart';
+import 'package:stay_fit/providers/diet_menu.dart';
 import 'package:stay_fit/emotions/emoji_recorder_page.dart';
-import 'package:stay_fit/event_diet_list.dart';
-import 'package:stay_fit/event_emotions_list.dart';
-import 'package:stay_fit/event_workout_list.dart';
-import 'package:stay_fit/reward_points.dart';
-import 'package:stay_fit/reward_points_page.dart';
-import 'package:stay_fit/workout/workout_manager.dart';
+import 'package:stay_fit/providers/event_diet_list.dart';
+import 'package:stay_fit/providers/event_emotions_list.dart';
+import 'package:stay_fit/providers/event_workout_list.dart';
+import 'package:stay_fit/providers/reward_points.dart';
 import 'package:stay_fit/workout/workout_recorder_page.dart';
-import 'package:stay_fit/Models/event.dart';
-
 import 'Models/reward.dart';
-import 'dropdown_textbox.dart';
 
 void main() {
   runApp(const MyApp());

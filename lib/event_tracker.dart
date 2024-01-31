@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
-import 'package:stay_fit/event_emotions_list.dart';
 
 class EventTracker extends StatelessWidget {
   final List<Event> _event;
@@ -21,8 +19,9 @@ class EventTracker extends StatelessWidget {
                 _event.length, (index) => Card(
                 color: Color.fromRGBO(173, 167, 153, 5),
                 child: SizedBox(
+                  key: Key("card"),
                   height: 60,
-                  child: Center(child: Text('  ${_event.elementAt(index).text} on ${_event.elementAt(index).date.day}-${_event.elementAt(index).date.month}-${_event.elementAt(index).date.year} at ${_event.elementAt(index).date.hour}-${_event.elementAt(index).date.minute}-${_event.elementAt(index).date.second}.')),
+                  child: Center(child: Text('  ${_event.elementAt(index).text} on ${_event.elementAt(index).date.month}-${_event.elementAt(index).date.day}-${_event.elementAt(index).date.year} at ${_event.elementAt(index).date.hour}-${_event.elementAt(index).date.minute}-${_event.elementAt(index).date.second}.')),
                 ),
               ),
               ),

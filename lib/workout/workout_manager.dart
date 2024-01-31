@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/Models/event.dart';
 
-import '../event_workout_list.dart';
-import '../reward_points.dart';
+import '../providers/event_workout_list.dart';
+import '../providers/reward_points.dart';
 
 enum WorkoutLabel {
   pushups('Push-ups'),
@@ -21,8 +21,7 @@ enum WorkoutLabel {
 }
 
 class WorkoutManager extends StatefulWidget {
-  final void Function(Event event) addWorkoutEvent;
-  const WorkoutManager(this.addWorkoutEvent, {super.key});
+  const WorkoutManager({super.key});
 
   @override
   _WorkoutManagerState createState() {
@@ -48,10 +47,7 @@ class _WorkoutManagerState extends State<WorkoutManager> {
           str,
           DateTime.now()
       );
-      widget.addWorkoutEvent(event);
       context.read<RewardPoints>().setEvent('Workout');
-      // context.read<RewardPoints>().setDate(DateTime.now());
-      // context.read<RewardPoints>().setPoints(1.0);
       context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<WorkoutList>().addWorkoutToList(event);
     }
@@ -70,9 +66,10 @@ class _WorkoutManagerState extends State<WorkoutManager> {
         children: [
           const Text("Let's Workout!", style: TextStyle(color: Colors.black54, fontSize: 35, fontFamily: 'Calistoga')),
           DropdownMenu<WorkoutLabel>(
+            key: Key("Workout"),
             initialSelection: WorkoutLabel.plank,
             controller: myWorkoutController,
-            requestFocusOnTap: true,
+            //requestFocusOnTap: true,
             label: const Text('Select a workout'),
             onSelected: (WorkoutLabel? workout) {
               selectedWorkout = workout!;
@@ -87,6 +84,7 @@ class _WorkoutManagerState extends State<WorkoutManager> {
                 }).toList(),
           ),
           TextFormField(
+            key: Key("Reps"),
             keyboardType: TextInputType.numberWithOptions(decimal: false),
             controller: myQuantityController,
             inputFormatters: [
@@ -103,16 +101,15 @@ class _WorkoutManagerState extends State<WorkoutManager> {
               return null;
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 120),
+          Center(
             child: ElevatedButton(
+              key: Key("SubmitWorkout"),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
                   _onSavePressed();
                 }
+                FocusScope.of(context).unfocus();
               },
               child: const Text('Submit'),
             ),

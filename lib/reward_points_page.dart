@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stay_fit/reward_points.dart';
+import 'package:stay_fit/providers/reward_points.dart';
 
 class RewardPointsPage extends StatefulWidget {
   const RewardPointsPage({super.key});
