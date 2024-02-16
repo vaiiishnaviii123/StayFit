@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/providers/event_workout_list.dart';
 import 'package:stay_fit/workout/workout_manager.dart';
-import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/models/event.dart';
 import '../event_tracker.dart';
 import '../reward_points_page.dart';
 

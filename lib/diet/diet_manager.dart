@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/models/event.dart';
 import 'package:stay_fit/providers/diet_menu.dart';
 import 'package:stay_fit/providers/event_diet_list.dart';
 
@@ -57,7 +57,7 @@ class _DietManagerState extends State<DietManager> {
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
-      child: Column(
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(child: const Text("Diet Record.", style: TextStyle(color: Colors.black54, fontSize: 35))),

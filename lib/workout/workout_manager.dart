@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/models/event.dart';
 
 import '../providers/event_workout_list.dart';
 import '../providers/reward_points.dart';

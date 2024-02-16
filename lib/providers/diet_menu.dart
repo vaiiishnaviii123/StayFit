@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:stay_fit/Models/event.dart';
+import 'package:stay_fit/models/event.dart';
 
 class DietMenu with ChangeNotifier {
   var list = <String>{};

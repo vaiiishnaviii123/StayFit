@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:stay_fit/Models/reward.dart';
+import 'package:stay_fit/models/reward.dart';
 
 class RewardPoints with ChangeNotifier {
   Reward reward;
