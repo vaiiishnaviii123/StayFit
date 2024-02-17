@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:stay_fit/models/event.dart';
 import 'package:stay_fit/providers/diet_menu.dart';
 import 'package:stay_fit/providers/event_diet_list.dart';
-
 import '../providers/events_view_model.dart';
 import '../providers/reward_points.dart';
 
@@ -21,13 +20,22 @@ class _DietManagerState extends State<DietManager> {
   final TextEditingController myQuantityController = TextEditingController();
   final TextEditingController myDietController = TextEditingController();
   late bool _enabled;
+  List<String> menu = [];
+
+  Future<void> setMenuItem() async {
+      menu =  await context.read<EventsViewModel>().getMenuList('DIET');
+  }
 
   @override
   void initState() {
-    if(context.read<DietMenu>().getDietMenu().isEmpty){
-      _enabled = false;
-    }else{
+    setMenuItem();
+    if(context.read<EventsViewModel>().getMenuList('DIET').toString().length > 34){
+      print('inside true');
+      print(context.read<EventsViewModel>().getMenuList('DIET').toString().length);
       _enabled = true;
+    }else{
+      print(context.read<EventsViewModel>().getMenuList('DIET').toString().length);
+      _enabled = false;
     }
     super.initState();
   }
@@ -53,9 +61,9 @@ class _DietManagerState extends State<DietManager> {
       context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<DietList>().addDietToList(event);
       context.read<EventsViewModel>().addEvent(event);
+      setMenuItem();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +99,7 @@ class _DietManagerState extends State<DietManager> {
                   myDietController.text = value;
                 },
                 itemBuilder: (BuildContext context) {
-                  return  context.read<DietMenu>().getDietMenu().map<PopupMenuItem<String>>((String value) {
+                  return  menu.map<PopupMenuItem<String>>((String value) {
                     return  PopupMenuItem(value: value, child:  Text(value));
                   }).toList();
                 },

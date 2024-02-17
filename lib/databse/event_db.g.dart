@@ -149,6 +149,14 @@ class _$EventsDao extends EventsDao {
   }
 
   @override
+  Future<List<String>> getMenuList(String eventType) async {
+    return _queryAdapter.queryList(
+        'SELECT information FROM Events WHERE eventType = ?1',
+        mapper: (Map<String, Object?> row) => row.values.first as String,
+        arguments: [eventType]);
+  }
+
+  @override
   Future<void> addEvent(EventEntity event) async {
     await _eventEntityInsertionAdapter.insert(event, OnConflictStrategy.abort);
   }

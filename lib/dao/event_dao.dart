@@ -11,4 +11,7 @@ abstract class EventsDao {
 
   @delete
   Future<void> deleteEvent(EventEntity event);
+
+  @Query('SELECT information FROM Events WHERE eventType = :eventType')
+  Future<List<String>> getMenuList(String eventType);
 }

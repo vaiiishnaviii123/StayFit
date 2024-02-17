@@ -4,4 +4,5 @@ abstract class EventsRepository {
   Future<void> addEvent(Event event);
   Future<List<Event>> listByEventType(String eventType);
   Future<void> deleteEvent(Event event);
+  Future<List<String>> getMenuList(String eventType);
 }

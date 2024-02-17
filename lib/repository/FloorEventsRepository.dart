@@ -49,4 +49,10 @@ class FloorEventsRepository implements EventsRepository {
     );
     await _database.eventsDao.deleteEvent(entity);
   }
+
+  @override
+  Future<List<String>> getMenuList(String eventType) async {
+    final entities = await _database.eventsDao.getMenuList(eventType);
+    return entities.toList();
+  }
 }

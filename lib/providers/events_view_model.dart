@@ -6,7 +6,7 @@ import '../repository/events_repository.dart';
 
 class EventsViewModel with ChangeNotifier {
   EventsRepository _repository;
-
+  List<String> list = [];
   EventsViewModel(this._repository);
 
   void addEvent(Event event) async {
@@ -21,5 +21,9 @@ class EventsViewModel with ChangeNotifier {
   void deleteEvent(Event event) async {
     await _repository.deleteEvent(event);
     notifyListeners();
+  }
+
+  Future<List<String>> getMenuList(String eventType) async {
+   return await _repository.getMenuList(eventType);
   }
 }
