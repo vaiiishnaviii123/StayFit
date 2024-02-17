@@ -26,4 +26,14 @@ class EventsViewModel with ChangeNotifier {
   Future<List<String>> getMenuList(String eventType) async {
    return await _repository.getMenuList(eventType);
   }
+
+  void updateDietEvent(Event event) async {
+    await _repository.updateDietEvent(event);
+    notifyListeners();
+  }
+
+  Future<int> getCountOfAllEvents(String eventType) async {
+    return await _repository.getCountOfAllEvents(eventType);
+  }
+
 }

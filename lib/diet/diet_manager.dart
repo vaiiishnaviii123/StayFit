@@ -19,7 +19,7 @@ class _DietManagerState extends State<DietManager> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController myQuantityController = TextEditingController();
   final TextEditingController myDietController = TextEditingController();
-  late bool _enabled;
+  bool _enabled = true;
   List<String> menu = [];
 
   Future<void> setMenuItem() async {
@@ -29,13 +29,11 @@ class _DietManagerState extends State<DietManager> {
   @override
   void initState() {
     setMenuItem();
-    if(context.read<EventsViewModel>().getMenuList('DIET').toString().length > 34){
-      print('inside true');
-      print(context.read<EventsViewModel>().getMenuList('DIET').toString().length);
-      _enabled = true;
-    }else{
-      print(context.read<EventsViewModel>().getMenuList('DIET').toString().length);
+    if(context.read<EventsViewModel>().getCountOfAllEvents('DIET') == []){
+      print(context.read<EventsViewModel>().getCountOfAllEvents('DIET').toString());
       _enabled = false;
+    }else{
+      _enabled = true;
     }
     super.initState();
   }
@@ -62,6 +60,7 @@ class _DietManagerState extends State<DietManager> {
       context.read<DietList>().addDietToList(event);
       context.read<EventsViewModel>().addEvent(event);
       setMenuItem();
+      _formKey.currentState!.reset();
     }
   }
 
@@ -92,7 +91,7 @@ class _DietManagerState extends State<DietManager> {
                     },
                   ),
               ),
-              if(this._enabled)PopupMenuButton<String>(
+              if(this._enabled) PopupMenuButton<String>(
                 key: Key("DietMenuButton"),
                 icon: const Icon(Icons.arrow_drop_down),
                 onSelected: (String value) {

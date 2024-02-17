@@ -55,4 +55,24 @@ class FloorEventsRepository implements EventsRepository {
     final entities = await _database.eventsDao.getMenuList(eventType);
     return entities.toList();
   }
+
+  @override
+  Future<void> updateDietEvent(Event event) async {
+    print('update pressed repo');
+    EventEntity entity = EventEntity(
+        event.id,
+        event.iformation,
+        event.occurredOn.millisecondsSinceEpoch,
+        event.amount,
+        event.eventType
+    );
+    await _database.eventsDao.updateDietEvent(entity);
+  }
+
+  @override
+  Future<int> getCountOfAllEvents(String eventType) async {
+    Future<int?> futureCount = _database.eventsDao.getCountOfEvents(eventType);
+    int? count = await futureCount;
+    return count ?? 0;
+  }
 }

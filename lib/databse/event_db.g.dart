@@ -114,6 +114,17 @@ class _$EventsDao extends EventsDao {
                   'amount': item.amount,
                   'eventType': item.eventType
                 }),
+        _eventEntityUpdateAdapter = UpdateAdapter(
+            database,
+            'Events',
+            ['id'],
+            (EventEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'information': item.information,
+                  'occurredOn': item.occurredOn,
+                  'amount': item.amount,
+                  'eventType': item.eventType
+                }),
         _eventEntityDeletionAdapter = DeletionAdapter(
             database,
             'Events',
@@ -133,6 +144,8 @@ class _$EventsDao extends EventsDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<EventEntity> _eventEntityInsertionAdapter;
+
+  final UpdateAdapter<EventEntity> _eventEntityUpdateAdapter;
 
   final DeletionAdapter<EventEntity> _eventEntityDeletionAdapter;
 
@@ -157,8 +170,21 @@ class _$EventsDao extends EventsDao {
   }
 
   @override
+  Future<int?> getCountOfEvents(String eventType) async {
+    return _queryAdapter.query(
+        'SELECT COUNT(*) FROM Events WHERE eventType > ?1',
+        mapper: (Map<String, Object?> row) => row.values.first as int,
+        arguments: [eventType]);
+  }
+
+  @override
   Future<void> addEvent(EventEntity event) async {
     await _eventEntityInsertionAdapter.insert(event, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateDietEvent(EventEntity event) async {
+    await _eventEntityUpdateAdapter.update(event, OnConflictStrategy.abort);
   }
 
   @override

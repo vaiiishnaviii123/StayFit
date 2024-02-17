@@ -14,4 +14,10 @@ abstract class EventsDao {
 
   @Query('SELECT information FROM Events WHERE eventType = :eventType')
   Future<List<String>> getMenuList(String eventType);
+
+  @update
+  Future<void> updateDietEvent(EventEntity event);
+
+  @Query('SELECT COUNT(*) FROM Events WHERE eventType > :eventType')
+  Future<int?> getCountOfEvents(String eventType);
 }

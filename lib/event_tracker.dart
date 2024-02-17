@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stay_fit/event_edit_form.dart';
 import 'package:stay_fit/models/event.dart';
 import 'package:stay_fit/providers/events_view_model.dart';
 
@@ -21,7 +22,7 @@ class EventTracker extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: List.generate(
-                events.length, (index) => EventTrackerCard(events.elementAt(index))
+                events.length, (index) => EventTrackerCard(events.elementAt(index), events.elementAt(index).eventType )
             ),
           );
         } else if(snapshot.hasError) {
@@ -36,18 +37,36 @@ class EventTracker extends StatelessWidget {
 
 class EventTrackerCard extends StatefulWidget {
   Event _event;
-  EventTrackerCard(this._event, {super.key});
+  String type;
+  EventTrackerCard(this._event,this.type, {super.key});
 
   @override
   _EventTrackerCardState createState() => _EventTrackerCardState();
 
 }
 class _EventTrackerCardState extends State<EventTrackerCard> {
+  late bool enabled;
+
+  @override
+  void initState() {
+    if(widget.type == 'DIET'){
+      enabled = true;
+    }else{
+      enabled = false;
+    }
+    super.initState();
+  }
 
   void deleteEvent(Event event){
     print('delete pressed');
     context.read<EventsViewModel>().deleteEvent(event);
   }
+
+  void updateItem(Event event){
+    print('edit pressed');
+    print(event.eventType);
+  }
+
   @override
   Widget build(BuildContext context) {
     String str = '';
@@ -67,18 +86,28 @@ class _EventTrackerCardState extends State<EventTrackerCard> {
         height: 60,
         child: Center(
             child: ListTile(
-              leading: Text('${widget._event.id}'),
+               leading: enabled ?IconButton(
+                 icon: Icon(Icons.edit),
+                 onPressed: () {
+                   showModalBottomSheet(
+                     context: context,
+                     builder: (context) {
+                       return BankBalanceForm(widget._event);
+                     },
+                   );
+                 },
+               ) : null,
               title: Text('$str on ${widget._event.occurredOn}', style: TextStyle(fontSize: 12),),
               trailing: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  print('delete pressed');
-                  deleteEvent(widget._event);
-                },
-              ),
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        print('delete pressed');
+                        deleteEvent(widget._event);
+                      },
+                  ),
+              )
             )
         ),
-      ),
     );
   }
 

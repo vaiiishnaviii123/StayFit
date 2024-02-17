@@ -55,6 +55,7 @@ class _WorkoutManagerState extends State<WorkoutManager> {
       context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<WorkoutList>().addWorkoutToList(event);
       context.read<EventsViewModel>().addEvent(event);
+      _formKey.currentState!.reset();
     }
   }
 
