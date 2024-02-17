@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:stay_fit/models/event.dart';
 
 import '../providers/event_workout_list.dart';
+import '../providers/events_view_model.dart';
 import '../providers/reward_points.dart';
 
 enum WorkoutLabel {
@@ -44,12 +45,16 @@ class _WorkoutManagerState extends State<WorkoutManager> {
       print("Your selected workout is recorded!");
       String str = 'Workout Type: '+ selectedWorkout.label + ',  Reps: ' + myQuantityController.text;
       Event event = Event(
-          str,
-          DateTime.now()
+        null,
+        selectedWorkout.label,
+          DateTime.now(),
+          'WORKOUT',
+           double.parse(myQuantityController.text),
       );
       context.read<RewardPoints>().setEvent('Workout');
       context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<WorkoutList>().addWorkoutToList(event);
+      context.read<EventsViewModel>().addEvent(event);
     }
   }
 

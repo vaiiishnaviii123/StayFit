@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:stay_fit/models/event.dart';
 import 'package:stay_fit/providers/reward_points.dart';
 
+import '../providers/events_view_model.dart';
 import '../providers/event_emotions_list.dart';
 
 
@@ -48,14 +49,18 @@ class _EmojiRecorderState extends State<EmojiRecorder> {
   double points = 0.0;
   int dedicationLevel = 0;
 
-  void _onSavePressed(String str){
+  void _onSavePressed(String str) {
      Event event = Event(
+          null,
           str,
-          DateTime.now()
+          DateTime.now(),
+          'EMOTION',
+          0.00
      );
      context.read<RewardPoints>().setEvent('Emotions');
      context.read<RewardPoints>().calcDedicationAndPoints();
      context.read<EmotionList>().addEmotionsToList(event);
+     context.read<EventsViewModel>().addEvent(event);
   }
 
   @override

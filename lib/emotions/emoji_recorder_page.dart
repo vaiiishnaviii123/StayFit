@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:stay_fit/emotions/emoji_recorder.dart';
+import 'package:stay_fit/entity/show_emotion_list.dart';
 import 'package:stay_fit/event_tracker.dart';
 import 'package:stay_fit/reward_points_page.dart';
-import '../providers/event_emotions_list.dart';
 
 class EmojiRecorderPage extends StatefulWidget {
   const EmojiRecorderPage({super.key});
@@ -25,7 +24,10 @@ class _EmojiRecorderPageState extends State<EmojiRecorderPage> {
           children: [
             RewardPointsPage(),
             EmojiRecorder(),
-            EventTracker(context.watch<EmotionList>().getEmotionsList()),
+            //EventTracker(context.watch<EmotionList>().getEmotionsList(), 'EMOTION'),
+            SingleChildScrollView(
+              child: EventTracker('EMOTION'),
+            )
           ],
         )
     );

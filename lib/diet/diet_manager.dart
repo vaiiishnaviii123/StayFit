@@ -4,6 +4,7 @@ import 'package:stay_fit/models/event.dart';
 import 'package:stay_fit/providers/diet_menu.dart';
 import 'package:stay_fit/providers/event_diet_list.dart';
 
+import '../providers/events_view_model.dart';
 import '../providers/reward_points.dart';
 
 class DietManager extends StatefulWidget {
@@ -42,12 +43,16 @@ class _DietManagerState extends State<DietManager> {
       print("Your Dish has been recorded!");
       String str = 'Dish: '+ myDietController.text + ', Quantity: ' + myQuantityController.text +' grams';
       Event event = Event(
-          str,
-          DateTime.now()
+          null,
+          myDietController.text,
+          DateTime.now(),
+          'DIET',
+          double.parse(myQuantityController.text)
       );
       context.read<RewardPoints>().setEvent('Diet');
       context.read<RewardPoints>().calcDedicationAndPoints();
       context.read<DietList>().addDietToList(event);
+      context.read<EventsViewModel>().addEvent(event);
     }
   }
 

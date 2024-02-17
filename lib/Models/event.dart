@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Event {
-  final String text;
-  final DateTime date;
+  final int? id;
+  final String iformation; // emoji / dish / exercise
+  final DateTime occurredOn;
+  final String eventType;
+  final double? amount;
 
-  Event(this.text, this.date);
+  Event(this.id, this.iformation, this.occurredOn, this.eventType, this.amount);
 }
