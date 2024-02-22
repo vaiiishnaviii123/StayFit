@@ -1,39 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:stay_fit/models/reward.dart';
+import 'package:stay_fit/repository/rewards_respository.dart';
 
 class RewardPoints with ChangeNotifier {
-  Reward reward;
+  RewardsRepository _repository;
+  RewardPoints(this._repository);
 
-  RewardPoints(this.reward);
-
-  Reward getRewardPoints() { return reward; }
-
-  void setRewardPoints(Reward newReward) {
-    reward = newReward;
+  void addReward(Reward reward) async {
+    await _repository.addReward(reward);
     notifyListeners();
   }
 
-  void setEvent(String event) {
-    reward.event = event;
-    notifyListeners();
+  Future<Reward?> getLastRecord() async {
+    return await _repository.getLastRecord();
   }
 
-  void setDate(DateTime date) {
-    reward.date = date;
-    notifyListeners();
-  }
-
-  void setPoints(double points) {
-    reward.rewardPoints = points;
-    notifyListeners();
-  }
-
-  void setDedication(int points) {
-    reward.dedication = points;
-    notifyListeners();
-  }
-
-  void calcDedicationAndPoints(){
+  void calcDedicationAndPoints(Reward reward){
     DateTime currentTime = DateTime.now();
 
     // Calculate time difference in minutes
@@ -59,5 +41,6 @@ class RewardPoints with ChangeNotifier {
     reward.dedication = (reward.rewardPoints ~/ 100).toInt();
     reward.date = currentTime;
     reward.pointForNextLevel = (reward.dedication + 1) * 100 - reward.rewardPoints;
+    addReward(reward);
   }
 }

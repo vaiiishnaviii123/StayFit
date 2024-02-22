@@ -63,6 +63,8 @@ class _$EventDatabase extends EventDatabase {
 
   EventsDao? _eventsDaoInstance;
 
+  RewardsDao? _rewardsDaoInstance;
+
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -86,6 +88,8 @@ class _$EventDatabase extends EventDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Events` (`id` INTEGER, `information` TEXT NOT NULL, `occurredOn` INTEGER NOT NULL, `amount` REAL, `eventType` TEXT NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `Rewards` (`id` INTEGER, `rewardPoints` REAL NOT NULL, `dedication` INTEGER NOT NULL, `event` TEXT NOT NULL, `occuredOn` INTEGER NOT NULL, `pointForNextLevel` REAL NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -96,6 +100,11 @@ class _$EventDatabase extends EventDatabase {
   @override
   EventsDao get eventsDao {
     return _eventsDaoInstance ??= _$EventsDao(database, changeListener);
+  }
+
+  @override
+  RewardsDao get rewardsDao {
+    return _rewardsDaoInstance ??= _$RewardsDao(database, changeListener);
   }
 }
 
@@ -190,5 +199,49 @@ class _$EventsDao extends EventsDao {
   @override
   Future<void> deleteEvent(EventEntity event) async {
     await _eventEntityDeletionAdapter.delete(event);
+  }
+}
+
+class _$RewardsDao extends RewardsDao {
+  _$RewardsDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _rewardEntityInsertionAdapter = InsertionAdapter(
+            database,
+            'Rewards',
+            (RewardEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'rewardPoints': item.rewardPoints,
+                  'dedication': item.dedication,
+                  'event': item.event,
+                  'occuredOn': item.occuredOn,
+                  'pointForNextLevel': item.pointForNextLevel
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<RewardEntity> _rewardEntityInsertionAdapter;
+
+  @override
+  Future<RewardEntity?> getLastRecord() async {
+    return _queryAdapter.query('SELECT * FROM Rewards ORDER BY id DESC LIMIT 1',
+        mapper: (Map<String, Object?> row) => RewardEntity(
+            row['id'] as int?,
+            row['rewardPoints'] as double,
+            row['dedication'] as int,
+            row['event'] as String,
+            row['occuredOn'] as int,
+            row['pointForNextLevel'] as double));
+  }
+
+  @override
+  Future<void> addReward(RewardEntity reward) async {
+    await _rewardEntityInsertionAdapter.insert(
+        reward, OnConflictStrategy.abort);
   }
 }
