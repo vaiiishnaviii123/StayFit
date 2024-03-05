@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "676428324320",
+    "project_id": "stayfit-90e1a",
+    "storage_bucket": "stayfit-90e1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676428324320:android:1d67e18433c33b4fea9f85",
+        "android_client_info": {
+          "package_name": "com.example.stay_fit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuL7yFZEUrwfNs_yeIUikwB7ykAXTST4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

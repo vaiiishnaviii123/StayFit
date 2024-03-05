@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stay_fit/login/firebase_initializer.dart';
+import 'package:stay_fit/login/sign_in_up_form.dart';
+import 'package:stay_fit/login/sign_up_page.dart';
+import 'package:stay_fit/view/leaderboard/leaderboard_page.dart';
 import '../view/bottom_material_navbar.dart';
 import '../view/emotions/emoji_recorder_page.dart';
 import '../view/diet/diet_recorder_page.dart';
@@ -48,7 +52,29 @@ class RouterNavigation{
               ),
             ],
           ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                path: '/leaderboard',
+                builder: (BuildContext context, GoRouterState state) {
+                  return FirebaseInitializer();
+                },
+              ),
+            ],
+          ),
         ],
+      ),
+      GoRoute(
+        path: '/signUp',
+        pageBuilder: (context, state) => NoTransitionPage(
+          child: SignUpPage(),
+        ),
+      ),
+      GoRoute(
+        path: '/login',
+        pageBuilder: (context, state) => NoTransitionPage(
+          child: LoginRegisterForm(),
+        ),
       ),
     ],
   );

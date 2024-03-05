@@ -63,6 +63,7 @@
       "emoji23": "Te sentiste rara",
       "emoji24": "Te sentiste sorprendida ",
       "emoji25": "Tienes una idea alucinante",
+      "leaderBoard": "Tabla de clasificación",
   "validDishName": "Por favor ingresa un nombre de plato válido.",
   "validQuanitity": "Por favor ingresa un número positivo válido.",
   "validReps": "Por favor ingrese un número no decimal positivo válido.",

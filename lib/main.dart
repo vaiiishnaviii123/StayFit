@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/providers/app_alternative.dart';
@@ -6,6 +7,7 @@ import 'package:stay_fit/repository/floor_events_repository.dart';
 import 'package:stay_fit/databse/event_db.dart';
 import 'package:stay_fit/providers/reward_points.dart';
 import 'package:stay_fit/repository/floor_rewards_repository.dart';
+import 'firebase_options.dart';
 import 'models/navigation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,6 +15,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   EventDatabase database = await $FloorEventDatabase.databaseBuilder('tracker.db').build();
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp(database));
 }
 
