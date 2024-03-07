@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:stay_fit/view/event_tracker.dart';
 import '../../models/navigation.dart';
+import 'leader_board_list.dart';
 
 class LeaderboardPage extends StatefulWidget {
   LeaderboardPage({super.key});
@@ -13,23 +15,86 @@ class LeaderboardPage extends StatefulWidget {
 }
 
 class _LeaderboardPageState extends State<LeaderboardPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  Future deleteUser() async {
+    User? user = await _auth.currentUser!;
+    user.delete();
+    RouterNavigation.getRouter().go('/signUp');
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      child: Center(
-        child: Text('Welcome to leader board page'),
-      ),
+    return CupertinoPageScaffold(
+      backgroundColor: Color.fromRGBO(191, 186, 188, 1),
+        child: ListView(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+       Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Delete your Account?'),
+                        content: const Text(
+                            '''If you select Delete we will delete your account on our server.
+
+Your app data will also be deleted and you won't be able to retrieve it.
+
+Since this is a security-sensitive operation, you eventually are asked to login before your account can be deleted.'''),
+                        actions: [
+                          TextButton(
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              'Delete',
+                              style: TextStyle(color: Colors.red),),
+                            onPressed: () {
+                              deleteUser();
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Text("Delete Account"),
+            ),
+          ],
+        ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              "Leaderboard",
+              style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          SingleChildScrollView(
+            child: LeaderBoardList(),
+          )
+        ],
+        ),
     );
   }
 }

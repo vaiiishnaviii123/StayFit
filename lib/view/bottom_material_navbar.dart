@@ -1,13 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:stay_fit/login/sign_in_up_form.dart';
 import 'package:stay_fit/providers/app_alternative.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../models/navigation.dart';
+import '../providers/login_register.dart';
 
 
 class BottomNavBar extends StatefulWidget {
@@ -47,12 +45,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       backgroundColor: Color.fromRGBO(191, 186, 188, 1),
       appBar: AppBar(
           backgroundColor: isCupertino?CupertinoColors.inactiveGray: Color.fromRGBO(82, 7, 39, 2),
-          leading: IconButton(
-            icon: Icon(Icons.logout, color: Colors.white,),
-            onPressed: (){
-              RouterNavigation.getRouter().go('/leaderboard');
-            },
-          ),
           title: Row(
             children: [
               Text(AppLocalizations.of(context)!.stayFit, style: TextStyle(color: Colors.white)),

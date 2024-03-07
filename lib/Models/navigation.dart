@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stay_fit/login/firebase_initializer.dart';
-import 'package:stay_fit/login/sign_in_up_form.dart';
-import 'package:stay_fit/login/sign_up_page.dart';
-import 'package:stay_fit/view/leaderboard/leaderboard_page.dart';
+import 'package:stay_fit/view/login/signed_in_detector.dart';
 import '../view/bottom_material_navbar.dart';
 import '../view/emotions/emoji_recorder_page.dart';
 import '../view/diet/diet_recorder_page.dart';
+import '../view/login/firebase_initializer.dart';
+import '../view/login/sign_in_up_form.dart';
+import '../view/login/sign_up_page.dart';
 import '../view/workout/workout_recorder_page.dart';
 
 class RouterNavigation{
 
    static final GoRouter _router = GoRouter(
-    initialLocation: '/emoji/tracker',
+    initialLocation: '/leaderboard',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
         builder: (BuildContext context, GoRouterState state,
@@ -74,6 +74,12 @@ class RouterNavigation{
         path: '/login',
         pageBuilder: (context, state) => NoTransitionPage(
           child: LoginRegisterForm(),
+        ),
+      ),
+      GoRoute(
+        path: '/signIn/detector',
+        pageBuilder: (context, state) => NoTransitionPage(
+          child: SignedInDetector(),
         ),
       ),
     ],
