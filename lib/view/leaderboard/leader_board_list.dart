@@ -5,33 +5,16 @@ import 'package:stay_fit/providers/leader_board_provider.dart';
 import '../../providers/leaderboard_database_service.dart';
 import 'leader_board_card.dart';
 
-class LeaderBoardList extends StatefulWidget {
+class LeaderBoardList extends StatelessWidget {
   const LeaderBoardList({super.key});
-  @override
-  _LeaderBoardListState createState() {
-    return _LeaderBoardListState();
-  }
-}
 
-class _LeaderBoardListState extends State<LeaderBoardList> {
-  late Future<List<UserRewardPoints>> leaderBoard;
-  @override
-  void initState() {
-    this.fetchData();
-    super.initState();
-  }
-
-  Future<void> fetchData() async {
-    Future<List<UserRewardPoints>> list = context.watch<LeaderBoardDatabase>().fetchLeaderboardData();
-    setState(() {
-      leaderBoard = list;
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    fetchData();
+    Future<List<UserRewardPoints>> futureEvents = context.select<LeaderBoardProvider, Future<List<UserRewardPoints>>>(
+            (viewModel) => viewModel.getLeaderboard()
+    );
     return FutureBuilder(
-      future: leaderBoard,
+      future: futureEvents,
       builder: (context, snapshot) {
         if(snapshot.hasData) {
           final events = snapshot.data!;
@@ -39,7 +22,7 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: List.generate(
-                events.length, (index) => LeaderBoardCard(events.elementAt(index),index+1)
+                events.length, (index) => LeaderBoardCard(events.elementAt(index), index+1)
             ),
           );
         } else if(snapshot.hasError) {

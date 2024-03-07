@@ -47,7 +47,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LeaderBoardProvider(),
         ),
-        ChangeNotifierProvider(create: (context)=>LeaderBoardDatabase()),
     ],
       child: MaterialApp.router(
         localizationsDelegates: [

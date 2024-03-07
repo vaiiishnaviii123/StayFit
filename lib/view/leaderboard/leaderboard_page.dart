@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stay_fit/providers/leader_board_provider.dart';
 import 'package:stay_fit/view/event_tracker.dart';
 import '../../models/navigation.dart';
 import 'leader_board_list.dart';
@@ -23,6 +25,7 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
 
   Future deleteUser() async {
     User? user = await _auth.currentUser!;
+    context.read<LeaderBoardProvider>().deleteUserPoints(user.email);
     user.delete();
     RouterNavigation.getRouter().go('/signUp');
   }

@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stay_fit/models/user_points.dart';
-import 'leader_board_provider.dart';
 
-class LeaderBoardDatabase extends ChangeNotifier {
+class LeaderBoardDatabase{
    FirebaseFirestore database = FirebaseFirestore.instance;
    late CollectionReference userRewardPointsCollection = database.collection('UserRewardPoints');
 
@@ -12,7 +11,6 @@ class LeaderBoardDatabase extends ChangeNotifier {
       'rewardPoints': userRewards?.rewardPoints,
       'emailId':  userRewards?.emailId,
     });
-    notifyListeners();
   }
 
   Future<List<UserRewardPoints>> fetchLeaderboardData() async {
@@ -31,4 +29,12 @@ class LeaderBoardDatabase extends ChangeNotifier {
       throw error;
     }
   }
+
+   @override
+   Future<void> deleteUserPoints(String email) async {
+     await userRewardPointsCollection.doc(email).delete().then(
+           (doc) => print("Document deleted"),
+       onError: (e) => print("Error updating document $e"),
+     );
+   }
 }

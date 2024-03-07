@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/models/event.dart';
 import '../../models/reward.dart';
+import '../../models/user_points.dart';
 import '../../providers/app_alternative.dart';
 import '../../providers/events_view_model.dart';
+import '../../providers/leader_board_provider.dart';
 import '../../providers/reward_points.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 const double _kItemExtent = 32.0;
@@ -28,6 +31,7 @@ class _DietManagerState extends State<DietManager> {
   Set<String> menuSet = {" ",};
   late bool isCupertino;
   int _selectedWorkout = 0;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> setMenuItem() async {
       menu =  await context.read<EventsViewModel>().getMenuList('DIET');
@@ -73,13 +77,27 @@ class _DietManagerState extends State<DietManager> {
         points?.event = 'Diet';
         context.read<RewardPoints>().calcDedicationAndPoints(points!);
       }
-
       context.read<EventsViewModel>().addEvent(event);
+      if(_auth.currentUser != null){
+        var pts = await context.read<RewardPoints>().getLastRecord();
+        print('points');
+        print(pts?.rewardPoints);
+        addRewardPointsToFirebase(pts!.rewardPoints);
+      }
       setMenuItem();
     _formKey.currentState!.reset();
     myDietController.clear();
     myQuantityController.clear();
   }
+
+  addRewardPointsToFirebase(double points){
+    UserRewardPoints userRewards = UserRewardPoints(
+        rewardPoints: points,
+        emailId: _auth.currentUser!.email
+    );
+    context.read<LeaderBoardProvider>().addUserPoints(userRewards);
+  }
+
   void _showDialog() {
     showCupertinoModalPopup<void>(
       context: context,

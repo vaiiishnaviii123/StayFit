@@ -12,7 +12,7 @@ import '../view/workout/workout_recorder_page.dart';
 class RouterNavigation{
 
    static final GoRouter _router = GoRouter(
-    initialLocation: '/leaderboard',
+    initialLocation: '/emoji/tracker',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
         builder: (BuildContext context, GoRouterState state,

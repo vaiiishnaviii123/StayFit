@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/models/event.dart';
 import 'package:stay_fit/models/reward.dart';
+import '../../models/user_points.dart';
 import '../../providers/app_alternative.dart';
 import '../../providers/events_view_model.dart';
+import '../../providers/leader_board_provider.dart';
 import '../../providers/reward_points.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 const double _kItemExtent = 32.0;
@@ -77,6 +80,7 @@ class _WorkoutManagerState extends State<WorkoutManager> {
   int _selectedWorkout = 0;
   late Reward? reward;
   late bool isCupertino;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> getLastRecord() async {
     reward = (await context.read<RewardPoints>().getLastRecord());
@@ -115,9 +119,23 @@ class _WorkoutManagerState extends State<WorkoutManager> {
         context.read<RewardPoints>().calcDedicationAndPoints(points!);
       }
       context.read<EventsViewModel>().addEvent(event);
+      if(_auth.currentUser != null){
+        var pts = await context.read<RewardPoints>().getLastRecord();
+        print('points');
+        print(pts?.rewardPoints);
+        addRewardPointsToFirebase(pts!.rewardPoints);
+      }
       _formKey.currentState!.reset();
       myQuantityController.clear();
     }
+  }
+
+  addRewardPointsToFirebase(double points){
+    UserRewardPoints userRewards = UserRewardPoints(
+        rewardPoints: points,
+        emailId: _auth.currentUser!.email
+    );
+    context.read<LeaderBoardProvider>().addUserPoints(userRewards);
   }
 
   void _showDialog(Widget child) {

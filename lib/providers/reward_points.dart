@@ -2,17 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stay_fit/models/reward.dart';
+import 'package:stay_fit/providers/leader_board_provider.dart';
 import 'package:stay_fit/repository/rewards_respository.dart';
-
-import '../models/user_points.dart';
 import 'leaderboard_database_service.dart';
 
 class RewardPoints with ChangeNotifier {
   RewardsRepository _repository;
   RewardPoints(this._repository);
-  LeaderBoardDatabase database =  new LeaderBoardDatabase();
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  bool _isLoggedIn = false;
 
   void addReward(Reward reward) async {
     await _repository.addReward(reward);
@@ -50,22 +46,5 @@ class RewardPoints with ChangeNotifier {
     reward.date = currentTime;
     reward.pointForNextLevel = (reward.dedication + 1) * 100 - reward.rewardPoints;
     addReward(reward);
-    addRewardPointsToFirebase(reward.rewardPoints);
-  }
-
-  addRewardPointsToFirebase(double points){
-    UserRewardPoints userRewards = UserRewardPoints(
-      rewardPoints: points,
-      emailId: _auth.currentUser!.email
-    );
-    database.addUserRewardsToLeaderBoard(userRewards);
-  }
-
-  _checkIfLogin() async{
-    _auth.authStateChanges().listen((User? user){
-      if(user !=null){
-          _isLoggedIn = true;
-      }
-    });
   }
 }

@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stay_fit/models/emoji_list.dart';
 import 'package:stay_fit/models/event.dart';
+import 'package:stay_fit/providers/leader_board_provider.dart';
 import 'package:stay_fit/providers/reward_points.dart';
 import 'package:stay_fit/view/emotions/emoji_grid.dart';
 import '../../models/reward.dart';
+import '../../models/user_points.dart';
 import '../../providers/app_alternative.dart';
 import '../../providers/events_view_model.dart';
 import 'emoji_cupertino_grid.dart';
@@ -24,6 +27,7 @@ class _EmojiRecorderState extends State<EmojiRecorder> {
   double points = 0.0;
   int dedicationLevel = 0;
   late bool isCupertino;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> setLastRecord() async {
     reward = (await context.read<RewardPoints>().getLastRecord());
@@ -54,8 +58,20 @@ class _EmojiRecorderState extends State<EmojiRecorder> {
        points?.event = 'Emotion';
        context.read<RewardPoints>().calcDedicationAndPoints(points!);
      }
-
      context.read<EventsViewModel>().addEvent(event);
+     if(_auth.currentUser != null){
+       var pts = await context.read<RewardPoints>().getLastRecord();
+       print('points');
+       print(pts?.rewardPoints);
+       addRewardPointsToFirebase(pts!.rewardPoints);
+     }  }
+
+  addRewardPointsToFirebase(double points){
+    UserRewardPoints userRewards = UserRewardPoints(
+        rewardPoints: points,
+        emailId: _auth.currentUser!.email
+    );
+    context.read<LeaderBoardProvider>().addUserPoints(userRewards);
   }
 
   @override
