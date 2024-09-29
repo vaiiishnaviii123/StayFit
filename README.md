@@ -77,7 +77,7 @@ Explore the Stay Fit App to record your daily health activities!
 
 
 
-    ![Screenshot_20240929_175842](https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7)
+   <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" /> ![Screenshot_20240929_175842](https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7)
 ![Screenshot_20240929_175912](https://github.com/user-attachments/assets/ae845857-e2e0-4a2a-8a32-806eb4449fb5)
 ![Screenshot_20240929_175900](https://github.com/user-attachments/assets/9c75a7cb-665d-4afd-9523-345e68ffb72b)
 ![Screenshot_20240929_180016](https://github.com/user-attachments/assets/ea17e232-c28d-4a88-88ff-927853a67737)
