@@ -1,6 +1,6 @@
 # Stay Fit
 
-This is a health chekin app for your daily needs.
+This is a health check-in app designed to support your daily wellness needs. The app offers customizable settings, allowing you to enjoy a tailored user experience on both Android and iPhone devices.
 
 ## Getting Started
 
