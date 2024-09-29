@@ -76,7 +76,7 @@ Explore the Stay Fit App to record your daily health activities!
   - Along with diet track how many calories you burnt a day.
     
 6. **Leaderboard:** 
-  -Tracks the score of all the users who have signed up to the leaderboard.
+  - Tracks the score of all the users who have signed up to the leaderboard.
    
 <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" />
 <img src="https://github.com/user-attachments/assets/ea17e232-c28d-4a88-88ff-927853a67737" width="300" />
