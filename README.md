@@ -69,7 +69,7 @@ Explore the Stay Fit App to record your daily health activities!
 1. **Emotion Recorder:**
    - Record how you feel everyday and track your history of emotions.
        <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" />
-       <img src="https://github.com/user-attachments/assets/ea17e232-c28d-4a88-88ff-927853a67737 width="300 />
+       <img src="https://github.com/user-attachments/assets/ea17e232-c28d-4a88-88ff-927853a67737" width="300" />
 2. **Diet Recorder:**
    - Track what you ate daily and get a history of your diet.
         <img src="https://github.com/user-attachments/assets/9c75a7cb-665d-4afd-9523-345e68ffb72b" width="300" />
@@ -82,14 +82,4 @@ Explore the Stay Fit App to record your daily health activities!
    - Tracks the score of all the users who have signed up to the leaderboard.
        <img src="https://github.com/user-attachments/assets/9ba22075-d254-406f-a05d-e6e0a8c1a0c0" width="300" />
        <img src="https://github.com/user-attachments/assets/83552589-a536-444a-85b7-34b6f8b9ac91" width="300" />
-
-
-   <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" /> ![Screenshot_20240929_175842](https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7)
-![Screenshot_20240929_175912](https://github.com/user-attachments/assets/ae845857-e2e0-4a2a-8a32-806eb4449fb5)
-![Screenshot_20240929_175900](https://github.com/user-attachments/assets/9c75a7cb-665d-4afd-9523-345e68ffb72b)
-![Screenshot_20240929_180016]()
-![Screenshot_20240929_180007]()
-![Screenshot_20240929_175953]()
-![Screenshot_20240929_175935]()
-![Screenshot_20240929_175927](https://github.com/user-attachments/assets/9ba22075-d254-406f-a05d-e6e0a8c1a0c0)
 
