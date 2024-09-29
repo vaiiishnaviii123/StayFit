@@ -66,19 +66,19 @@ Dart plugin fo Vs code: [Dart plugin](https://marketplace.visualstudio.com/items
 
 Explore the Stay Fit App to record your daily health activities!
 
-1. **Emotion Recorder:**
+1. **Emotion Recorder:** Record how you feel everyday and track your history of emotions.
    - Record how you feel everyday and track your history of emotions.
        <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" />
        <img src="https://github.com/user-attachments/assets/ea17e232-c28d-4a88-88ff-927853a67737" width="300" />
-2. **Diet Recorder:**
+2. **Diet Recorder:** Track what you ate daily and get a history of your diet.
    - Track what you ate daily and get a history of your diet.
         <img src="https://github.com/user-attachments/assets/9c75a7cb-665d-4afd-9523-345e68ffb72b" width="300" />
         <img src="https://github.com/user-attachments/assets/10c046d3-cacc-4c23-9801-bab3df564c44" width="300" />
-3. **Workout Recorder:**
+3. **Workout Recorder:** Along with diet track how many calories you burnt a day.
    - Along with diet track how many calories you burnt a day.
        <img src="https://github.com/user-attachments/assets/ae845857-e2e0-4a2a-8a32-806eb4449fb5" width="300" />
        <img src="https://github.com/user-attachments/assets/4e9ad06b-7202-4234-9a24-6950407f9154" width="300" />
-4. **Leaderboard:**
+4. **Leaderboard:** Tracks the score of all the users who have signed up to the leaderboard.
    - Tracks the score of all the users who have signed up to the leaderboard.
        <img src="https://github.com/user-attachments/assets/9ba22075-d254-406f-a05d-e6e0a8c1a0c0" width="300" />
        <img src="https://github.com/user-attachments/assets/83552589-a536-444a-85b7-34b6f8b9ac91" width="300" />
