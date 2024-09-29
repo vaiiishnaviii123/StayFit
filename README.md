@@ -67,7 +67,7 @@ Dart plugin fo Vs code: [Dart plugin](https://marketplace.visualstudio.com/items
 Explore the Stay Fit App to record your daily health activities!
 
 1. **Emotion Recorder:** Record how you feel everyday and track your history of emotions.
-       <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" left="0" />
+       <img src="https://github.com/user-attachments/assets/6c397b35-02a8-4231-b6a8-4189fd82c0d7" width="300" float="left" />
        <img src="https://github.com/user-attachments/assets/ea17e232-c28d-4a88-88ff-927853a67737" width="300" />
 2. **Diet Recorder:** Track what you ate daily and get a history of your diet.
         <img src="https://github.com/user-attachments/assets/9c75a7cb-665d-4afd-9523-345e68ffb72b" width="300" />
